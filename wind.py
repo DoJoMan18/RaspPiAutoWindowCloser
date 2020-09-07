@@ -9,9 +9,7 @@ Yellow = (255,220,0)
 Orange = (255,130,0)
 Brown = (80,30,0)
 
-color = Orange
-
-def DrawWind():
+def DrawWind(color):
     delay = 0.2
 
     b = (0,0,0)
@@ -112,4 +110,4 @@ def DrawWind():
     sense.clear()
     sleep(delay)
 
-DrawWind()
+DrawWind(Blue)
