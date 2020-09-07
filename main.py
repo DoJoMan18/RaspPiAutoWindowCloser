@@ -7,6 +7,7 @@ import urllib3
 # Setting up variables
 sh = SenseHat()
 http = urllib3.PoolManager()
+
 reallocation = ''
 location = ''
 weather_humidity = ''
@@ -40,3 +41,5 @@ while True:
         sleep(10)
     except urllib3.exceptions.MaxRetryError:
         print("Failed to establish a connection to one of the API's, please check your ethernet connection.")
+    except KeyboardInterrupt:
+        exit()
