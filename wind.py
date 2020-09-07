@@ -2,13 +2,21 @@ from sense_hat import SenseHat
 from time import sleep
 sense = SenseHat()
 
+Green = (0,255,0)
+Red = (255,0,0)
+Blue = (0,0,255)
+Yellow = (255,220,0)
+Orange = (255,130,0)
+Brown = (80,30,0)
+
+color = Orange
+
 def DrawWind():
     delay = 0.2
 
     b = (0,0,0)
-    g = (0,255,0)
-    r = (255,0,0)
-    c = g
+
+    c = color
 
     frame1 = [
         b,b,b,b,b,b,b,b,
