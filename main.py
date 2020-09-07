@@ -22,10 +22,9 @@ Orange = (255,130,0)
 Brown = (80,30,0)
 
 # Defining functions -------------------
-def DrawWind(color):
-    delay = 0.2
+def DrawWind(c):
+    delay = 0.25
     b = (0,0,0)
-    c = color
 
     frame1 = [
         b,b,b,b,b,b,b,b,
