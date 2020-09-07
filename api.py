@@ -40,5 +40,3 @@ while True:
     except urllib3.exceptions.MaxRetryError:
         print("Failed to establish a connection to one of the API's, please check your ethernet connection.")
 
-    except KeyboardInterrupt:
-        pass
