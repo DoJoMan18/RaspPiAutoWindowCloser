@@ -8,9 +8,7 @@ def DrawWind():
     b = (0,0,0)
     g = (0,255,0)
     r = (255,0,0)
-
     c = g
-
 
     frame1 = [
         b,b,b,b,b,b,b,b,
