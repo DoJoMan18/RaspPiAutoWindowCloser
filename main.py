@@ -1,4 +1,4 @@
-# Importing modules -------------------
+#Importing modules -------------------
 from sense_hat import SenseHat
 from time import sleep
 import json
@@ -11,6 +11,7 @@ http = urllib3.PoolManager()
 reallocation = ''
 location = ''
 weather_humidity = ''
+windowclosed = False
 
 Green = (0,255,0)
 Red = (255,0,0)
@@ -134,14 +135,30 @@ def getweather():
     data = http.request('GET', 'weerlive.nl/api/json-data-10min.php?key=907e914202&locatie={}'.format(location))
     weather = json.loads(data.data.decode('UTF-8'))
     # Getting humidity from weerlive
-    weather_humidity = weather['liveweer'][0]['lv']
+    weather_humidity = int(weather['liveweer'][0]['lv'])
 
 
 # Main program -------------------
 while True:
-    try: 
+    if windowclosed == True:
+        DrawWind(Red)
+    elif windowclosed == False:
+        DrawWind(Green)
+    else:
+        DrawWind(Blue)
+    sleep (3)
+    
+while True:
+    try:
         getlocation()
         getweather()
+        sh_humidity = round(sh.get_humidity(), 1)
+        if sh_humidity >= 95 or weather_humidity >= 95:
+            #raam sluiten
+            windowclosed = True
+        else:
+            #raam openen
+            windowclosed = False
         # Print stuff
         print('De luchtvochtigheid in', reallocation, 'is', weather_humidity)
         sleep(10)
