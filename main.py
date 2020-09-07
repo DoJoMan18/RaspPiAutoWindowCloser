@@ -7,17 +7,18 @@ import urllib3
 # Setting up variables
 sh = SenseHat()
 http = urllib3.PoolManager()
-
+reallocation = ''
 location = ''
 weather_humidity = ''
 
 
 def getlocation():
-    global location
+    global location, reallocation
     # API request for location
     data = http.request('GET', 'extreme-ip-lookup.com/json/')
     ipgeo = json.loads(data.data.decode('UTF-8'))
-    location = ipgeo['city']
+    location = ipgeo['city'].replace(" ", "")
+    reallocation = ipgeo['city']
 
 
 def getweather():
@@ -31,8 +32,11 @@ def getweather():
 
 # Main program -------------------
 while True:
-    getlocation()
-    getweather()
-    # Print stuff
-    print('De luchtvochtigheid in', location, 'is', weather_humidity)
-    sleep(10)
+    try: 
+        getlocation()
+        getweather()
+        # Print stuff
+        print('De luchtvochtigheid in', reallocation, 'is', weather_humidity)
+        sleep(10)
+    except urllib3.exceptions.MaxRetryError:
+        print("Failed to establish a connection to one of the API's, please check your ethernet connection.")
