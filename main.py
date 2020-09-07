@@ -22,9 +22,7 @@ Brown = (80,30,0)
 # Defining functions -------------------
 def DrawWind(color):
     delay = 0.2
-
     b = (0,0,0)
-
     c = color
 
     frame1 = [
@@ -104,21 +102,21 @@ def DrawWind(color):
         b,b,b,b,b,b,b,b
     ]
 
-    sense.clear()
+    sh.clear()
     sleep(delay)
-    sense.set_pixels(frame1)
+    sh.set_pixels(frame1)
     sleep(delay)
-    sense.set_pixels(frame2)
+    sh.set_pixels(frame2)
     sleep(delay)
-    sense.set_pixels(frame3)
+    sh.set_pixels(frame3)
     sleep(delay)
-    sense.set_pixels(frame4)
+    sh.set_pixels(frame4)
     sleep(delay)
-    sense.set_pixels(frame5)
+    sh.set_pixels(frame5)
     sleep(delay)
-    sense.set_pixels(frame6)
+    sh.set_pixels(frame6)
     sleep(delay)
-    sense.clear()
+    sh.clear()
     sleep(delay)
 
 def getlocation():
