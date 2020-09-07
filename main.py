@@ -4,7 +4,7 @@ from time import sleep
 import json
 import urllib3
 
-# Setting up variables
+# Setting up variables -------------------
 sh = SenseHat()
 http = urllib3.PoolManager()
 
@@ -12,7 +12,7 @@ reallocation = ''
 location = ''
 weather_humidity = ''
 
-
+# Defining functions -------------------
 def getlocation():
     global location, reallocation
     # API request for location
