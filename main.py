@@ -20,9 +20,6 @@ def getlocation():
     location = ipgeo['city']
 
 
-getlocation()  # Starting up
-
-
 def getweather():
     global location, weather_humidity
     # API request for weather
@@ -31,8 +28,6 @@ def getweather():
     # Getting humidity from weerlive
     weather_humidity = weather['liveweer'][0]['lv']
 
-
-getweather()  # Starting up
 
 # Main program -------------------
 while True:
