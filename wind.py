@@ -1,6 +1,6 @@
 from sense_hat import SenseHat
 from time import sleep
-sense = SenseHat()
+sh = SenseHat()
 
 Green = (0,255,0)
 Red = (255,0,0)
@@ -70,9 +70,9 @@ def DrawWind(c):
     ])
 
     for i in frames:
-        sense.set_pixels(i)
+        sh.set_pixels(i)
         sleep(delay)
     
-    sense.clear()
+    sh.clear()
 
 DrawWind(Blue)

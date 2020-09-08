@@ -83,10 +83,10 @@ def DrawWind(c):
     ])
 
     for i in frames:
-        sense.set_pixels(i)
+        sh.set_pixels(i)
         sleep(delay)
     
-    sense.clear()
+    sh.clear()
 
 def getlocation():
     global location, reallocation
