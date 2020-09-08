@@ -1,30 +1,20 @@
-#Importing modules -------------------
+# Importing modules -------------------
 from sense_hat import SenseHat
 from time import sleep
-import json
-import urllib3
+import json, urllib3
 
 # Setting up variables -------------------
 sh = SenseHat()
 http = urllib3.PoolManager()
-
-reallocation = '' # Location with spaces for printing
-location = ''   # Location without spaces for weerlive API
-weather_humidity = ''
+# Location with spaces for printing and Location without spaces for weerlive API
+reallocation = location = weather_humidity = ''
 windowclosed = False
 
-Green = (0,255,0)
-Red = (255,0,0)
-Blue = (0,0,255)
-Yellow = (255,220,0)
-Orange = (255,130,0)
-Brown = (80,30,0)
-
+Green, Red, Blue, Yellow, Orange, Brown, Black = (0, 255, 0), (255, 0, 0), (0, 0, 255), (255, 220, 0), (255, 130, 0), (80, 30, 0), (0, 0, 0)
 # Defining functions -------------------
-def DrawWind(c):
-    delay = 0.2
-    b = (0, 0, 0)
 
+def DrawWind(c, b, delay):
+    # All frames for Wind animation
     frames = ([
         b, b, b, b, b, b, b, b,
         b, b, b, b, b, b, b, b,
@@ -81,6 +71,7 @@ def DrawWind(c):
         b, b, b, b, b, b, b, b
     ])
 
+    # Displaying all frames and clearing when done
     for i in frames:
         sh.set_pixels(i)
         sleep(delay)
@@ -95,13 +86,16 @@ def getlocation():
     location = ipgeo['city'].replace(" ", "")
     reallocation = ipgeo['city']
 
+
 def getweather():
     global location, weather_humidity
     # API request for weather
-    data = http.request('GET', 'weerlive.nl/api/json-data-10min.php?key=907e914202&locatie={}'.format(location))
+    data = http.request(
+        'GET', 'weerlive.nl/api/json-data-10min.php?key=907e914202&locatie={}'.format(location))
     weather = json.loads(data.data.decode('UTF-8'))
     # Getting humidity from weerlive
     weather_humidity = int(weather['liveweer'][0]['lv'])
+
 
 while True:
     try:
@@ -109,20 +103,21 @@ while True:
         getweather()
         sh_humidity = round(sh.get_humidity(), 1)
         if sh_humidity >= 95 or weather_humidity >= 95:
-            #raam sluiten
+            # raam sluiten
             windowclosed = True
         else:
-            #raam openen
+            # raam openen
             windowclosed = False
         # Print stuff
-        print('De luchtvochtigheid in', reallocation, 'is', str(round(weather_humidity)) + "%")
-        for i in range(3): # Setup your sleep here. Right now its around 10 secondes
+        print('De luchtvochtigheid in', reallocation,
+              'is', str(round(weather_humidity)) + "%")
+        for i in range(3):  # Setup your sleep here. Right now its around 10 secondes
             if windowclosed == True:
-                DrawWind(Red)
+                DrawWind(Red, Black, 0.2)
             elif windowclosed == False:
-                DrawWind(Green)
+                DrawWind(Green, Black, 0.2)
             else:
-                DrawWind(Blue)
+                DrawWind(Blue, Black, 0.2)
             sleep(2)
 
     except urllib3.exceptions.MaxRetryError:
