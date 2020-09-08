@@ -1,31 +1,21 @@
 #Importing modules -------------------
 from sense_hat import SenseHat
 from time import sleep
-import json
-import urllib3
-import threading
+import json, urllib3, threading
+
 
 # Setting up variables -------------------
 sh = SenseHat()
 http = urllib3.PoolManager()
 
-reallocation = ''
-location = ''
-weather_humidity = ''
+reallocation = location = weather_humidity = ''
 windowclosed = False
 
-Green = (0,255,0)
-Red = (255,0,0)
-Blue = (0,0,255)
-Yellow = (255,220,0)
-Orange = (255,130,0)
-Brown = (80,30,0)
+Green, Red, Blue, Yellow, Orange, Brown, Black = (0,255,0), (255,0,0), (0,0,255), (255,220,0), (255,130,0), (80,30,0), (0,0,0) 
 
 # Defining functions -------------------
-def DrawWind(c):
-    delay = 0.2
-    b = (0,0,0)
-
+def DrawWind(c, b, delay):
+    #All frames of animation, c is chosen color b is background
     frames = ([
         b,b,b,b,b,b,b,b,
         b,b,b,b,b,b,b,b,
@@ -82,6 +72,7 @@ def DrawWind(c):
         b,b,b,b,b,b,b,b
     ])
 
+    #Displaying of frames and clearing at the end
     for i in frames:
         sh.set_pixels(i)
         sleep(delay)
@@ -108,12 +99,14 @@ def DrawLedLoop():
     global windowclosed
     while True:
         if windowclosed == True:
-            DrawWind(Red)
+            DrawWind(Red, Black, 0.2)
         elif windowclosed == False:
-            DrawWind(Green)
+            DrawWind(Green, Black, 0.2)
         else:
-            DrawWind(Blue)
+            DrawWind(Blue, Black, 0.2)
         sleep(3)
+
+
 
 def WindowHumidityLoop():
     global location, weather_humidity, windowclosed
@@ -135,6 +128,8 @@ def WindowHumidityLoop():
             print("Failed to establish a connection to one of the API's, please check your ethernet connection.")
         except KeyboardInterrupt:
             exit()
+
+
 
 thread1 = threading.Thread(target=WindowHumidityLoop)
 thread1.start()
