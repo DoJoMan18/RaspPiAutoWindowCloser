@@ -1,7 +1,7 @@
 #Importing modules -------------------
 from sense_hat import SenseHat
 from time import sleep
-import json, urllib3, threading
+import json, urllib3
 
 
 # Setting up variables -------------------
@@ -16,67 +16,68 @@ Green, Red, Blue, Yellow, Orange, Brown, Black = (0,255,0), (255,0,0), (0,0,255)
 # Defining functions -------------------
 def DrawWind(c, b, delay):
     #All frames of animation, c is chosen color b is background
+
     frames = ([
-        b,b,b,b,b,b,b,b,
-        b,b,b,b,b,b,b,b,
-        b,b,b,b,b,b,b,b,
-        b,b,b,b,b,b,c,c,
-        b,b,b,b,b,b,b,b,
-        b,b,b,b,b,b,b,b,
-        b,b,b,b,b,b,b,b,
-        b,b,b,b,b,b,c,b
-    ],[
-        b,b,b,b,b,b,b,b,
-        b,b,b,b,b,b,b,b,
-        b,b,b,b,b,b,b,b,
-        b,b,b,b,c,c,c,c,
-        b,b,b,b,b,b,b,b,
-        b,b,b,b,b,b,b,b,
-        b,b,b,b,b,b,b,b,
-        b,b,b,c,c,c,c,b
-    ],[
-        b,b,b,b,b,b,b,b,
-        b,b,b,b,b,b,b,b,
-        b,b,b,b,b,b,b,b,
-        b,b,b,c,c,c,c,b,
-        b,b,b,b,b,b,b,b,
-        b,b,b,b,b,b,b,b,
-        b,b,b,b,b,b,b,b,
-        b,b,c,c,c,c,b,b
-    ],[
-        b,b,b,b,b,b,b,b,
-        b,c,b,b,b,b,b,b,
-        b,c,b,b,b,b,b,b,
-        b,b,c,c,c,c,b,b,
-        b,b,b,b,b,b,b,b,
-        b,b,b,b,b,b,b,b,
-        c,b,b,b,b,b,b,b,
-        b,c,c,c,c,b,b,b
-    ],[
-        b,b,c,b,b,b,b,b,
-        b,c,b,c,b,b,b,b,
-        b,b,b,b,b,b,b,b,
-        b,b,b,b,b,b,b,b,
-        b,c,b,b,b,b,b,b,
-        c,b,c,b,b,b,b,b,
-        b,b,b,b,b,b,b,b,
-        b,b,b,b,b,b,b,b
-    ],[
-        b,b,b,b,b,b,b,b,
-        b,b,b,c,b,b,b,b,
-        b,b,b,b,b,b,b,b,
-        b,b,b,b,b,b,b,b,
-        b,b,b,b,b,b,b,b,
-        b,b,c,b,b,b,b,b,
-        b,b,b,b,b,b,b,b,
-        b,b,b,b,b,b,b,b
+        b, b, b, b, b, b, b, b,
+        b, b, b, b, b, b, b, b,
+        b, b, b, b, b, b, b, b,
+        b, b, b, b, b, b, c, c,
+        b, b, b, b, b, b, b, b,
+        b, b, b, b, b, b, b, b,
+        b, b, b, b, b, b, b, b,
+        b, b, b, b, b, b, c, b
+    ], [
+        b, b, b, b, b, b, b, b,
+        b, b, b, b, b, b, b, b,
+        b, b, b, b, b, b, b, b,
+        b, b, b, b, c, c, c, c,
+        b, b, b, b, b, b, b, b,
+        b, b, b, b, b, b, b, b,
+        b, b, b, b, b, b, b, b,
+        b, b, b, c, c, c, c, b
+    ], [
+        b, b, b, b, b, b, b, b,
+        b, b, b, b, b, b, b, b,
+        b, b, b, b, b, b, b, b,
+        b, b, b, c, c, c, c, b,
+        b, b, b, b, b, b, b, b,
+        b, b, b, b, b, b, b, b,
+        b, b, b, b, b, b, b, b,
+        b, b, c, c, c, c, b, b
+    ], [
+        b, b, b, b, b, b, b, b,
+        b, c, b, b, b, b, b, b,
+        b, c, b, b, b, b, b, b,
+        b, b, c, c, c, c, b, b,
+        b, b, b, b, b, b, b, b,
+        b, b, b, b, b, b, b, b,
+        c, b, b, b, b, b, b, b,
+        b, c, c, c, c, b, b, b
+    ], [
+        b, b, c, b, b, b, b, b,
+        b, c, b, c, b, b, b, b,
+        b, b, b, b, b, b, b, b,
+        b, b, b, b, b, b, b, b,
+        b, c, b, b, b, b, b, b,
+        c, b, c, b, b, b, b, b,
+        b, b, b, b, b, b, b, b,
+        b, b, b, b, b, b, b, b
+    ], [
+        b, b, b, b, b, b, b, b,
+        b, b, b, c, b, b, b, b,
+        b, b, b, b, b, b, b, b,
+        b, b, b, b, b, b, b, b,
+        b, b, b, b, b, b, b, b,
+        b, b, c, b, b, b, b, b,
+        b, b, b, b, b, b, b, b,
+        b, b, b, b, b, b, b, b
     ])
 
     #Displaying of frames and clearing at the end
     for i in frames:
         sh.set_pixels(i)
         sleep(delay)
-    
+
     sh.clear()
 
 def getlocation():
@@ -95,44 +96,31 @@ def getweather():
     # Getting humidity from weerlive
     weather_humidity = int(weather['liveweer'][0]['lv'])
 
-def DrawLedLoop():
-    global windowclosed
-    while True:
-        if windowclosed == True:
-            DrawWind(Red, Black, 0.2)
-        elif windowclosed == False:
-            DrawWind(Green, Black, 0.2)
+while True:
+    try:
+        getlocation()
+        getweather()
+        sh_humidity = round(sh.get_humidity(), 1)
+        if sh_humidity >= 95 or weather_humidity >= 95:
+            #raam sluiten
+            windowclosed = True
         else:
-            DrawWind(Blue, Black, 0.2)
-        sleep(3)
-
-
-
-def WindowHumidityLoop():
-    global location, weather_humidity, windowclosed
-    while True:
-        try:
-            getlocation()
-            getweather()
-            sh_humidity = round(sh.get_humidity(), 1)
-            if sh_humidity >= 95 or weather_humidity >= 95:
-                #raam sluiten
-                windowclosed = True
+            #raam openen
+            windowclosed = False
+        # Print stuff
+        print('De luchtvochtigheid in', reallocation, 'is', str(round(weather_humidity)) + "%")
+        for i in range(3): # Setup your sleep here. Right now its around 10 secondes
+            if windowclosed == True:
+                DrawWind(Red)
+            elif windowclosed == False:
+                DrawWind(Green)
             else:
-                #raam openen
-                windowclosed = False
-            # Print stuff
-            print('De luchtvochtigheid in', reallocation, 'is', str(round(weather_humidity)) + "%")
-            sleep(10)
-        except urllib3.exceptions.MaxRetryError:
-            print("Failed to establish a connection to one of the API's, please check your ethernet connection.")
-        except KeyboardInterrupt:
-            exit()
+                DrawWind(Blue)
+            sleep(2)
 
-
-
-thread1 = threading.Thread(target=WindowHumidityLoop)
-thread1.start()
-
-thread2 = threading.Thread(target=DrawLedLoop)
-thread2.start()
+    except urllib3.exceptions.MaxRetryError:
+        print("Failed to establish a connection to one of the API's, please check your ethernet connection.")
+    except KeyboardInterrupt:
+        exit()
+    finally:
+        sh.clear()
