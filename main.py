@@ -1,20 +1,30 @@
 #Importing modules -------------------
 from sense_hat import SenseHat
 from time import sleep
-import json, urllib3
+import json
+import urllib3
 
 # Setting up variables -------------------
 sh = SenseHat()
 http = urllib3.PoolManager()
 
-reallocation = location = weather_humidity = ''
+reallocation = '' # Location with spaces for printing
+location = ''   # Location without spaces for weerlive API
+weather_humidity = ''
 windowclosed = False
 
-Green, Red, Blue, Yellow, Orange, Brown, Black = (0,255,0), (255,0,0), (0,0,255), (255,220,0), (255,130,0), (80,30,0), (0,0,0) 
+Green = (0,255,0)
+Red = (255,0,0)
+Blue = (0,0,255)
+Yellow = (255,220,0)
+Orange = (255,130,0)
+Brown = (80,30,0)
 
 # Defining functions -------------------
-def DrawWind(c, b, delay):
-    #All frames of animation, c is chosen color b is background
+def DrawWind(c):
+    delay = 0.2
+    b = (0, 0, 0)
+
     frames = ([
         b, b, b, b, b, b, b, b,
         b, b, b, b, b, b, b, b,
@@ -71,7 +81,6 @@ def DrawWind(c, b, delay):
         b, b, b, b, b, b, b, b
     ])
 
-    #Displaying of frames and clearing at the end
     for i in frames:
         sh.set_pixels(i)
         sleep(delay)
@@ -109,11 +118,11 @@ while True:
         print('De luchtvochtigheid in', reallocation, 'is', str(round(weather_humidity)) + "%")
         for i in range(3): # Setup your sleep here. Right now its around 10 secondes
             if windowclosed == True:
-                DrawWind(Red, Black, 0.2)
+                DrawWind(Red)
             elif windowclosed == False:
-                DrawWind(Green, Black, 0.2)
+                DrawWind(Green)
             else:
-                DrawWind(Blue, Black, 0.2)
+                DrawWind(Blue)
             sleep(2)
 
     except urllib3.exceptions.MaxRetryError:
