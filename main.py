@@ -111,11 +111,11 @@ while True:
         print('De luchtvochtigheid in', reallocation, 'is', str(round(weather_humidity)) + "%")
         for i in range(3): # Setup your sleep here. Right now its around 10 secondes
             if windowclosed == True:
-                DrawWind(Red)
+                DrawWind(Red, Black, 0.2)
             elif windowclosed == False:
-                DrawWind(Green)
+                DrawWind(Green, Black, 0.2)
             else:
-                DrawWind(Blue)
+                DrawWind(Blue, Black, 0.2)
             sleep(2)
 
     except urllib3.exceptions.MaxRetryError:
