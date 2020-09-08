@@ -11,8 +11,8 @@ reallocation = location = weather_humidity = ''
 windowclosed = False
 
 Green, Red, Blue, Yellow, Orange, Brown, Black = (0, 255, 0), (255, 0, 0), (0, 0, 255), (255, 220, 0), (255, 130, 0), (80, 30, 0), (0, 0, 0)
-# Defining functions -------------------
 
+# Defining functions -------------------
 def DrawWind(c, b, delay):
     # All frames for Wind animation
     frames = ([
@@ -90,8 +90,7 @@ def getlocation():
 def getweather():
     global location, weather_humidity
     # API request for weather
-    data = http.request(
-        'GET', 'weerlive.nl/api/json-data-10min.php?key=907e914202&locatie={}'.format(location))
+    data = http.request('GET', 'weerlive.nl/api/json-data-10min.php?key=907e914202&locatie={}'.format(location))
     weather = json.loads(data.data.decode('UTF-8'))
     # Getting humidity from weerlive
     weather_humidity = int(weather['liveweer'][0]['lv'])
@@ -109,8 +108,7 @@ while True:
             # raam openen
             windowclosed = False
         # Print stuff
-        print('De luchtvochtigheid in', reallocation,
-              'is', str(round(weather_humidity)) + "%")
+        print('De luchtvochtigheid in', reallocation, 'is', str(round(weather_humidity)) + "%")
         for i in range(3):  # Setup your sleep here. Right now its around 10 secondes
             if windowclosed == True:
                 DrawWind(Red, Black, 0.2)
