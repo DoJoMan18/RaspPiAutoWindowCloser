@@ -129,7 +129,7 @@ def WindowHumidityLoop():
                 #raam openen
                 windowclosed = False
             # Print stuff
-            print('De luchtvochtigheid in', reallocation, 'is', str(weather_humidity) + "%")
+            print('De luchtvochtigheid in', reallocation, 'is', str(round(weather_humidity)) + "%")
             sleep(10)
         except urllib3.exceptions.MaxRetryError:
             print("Failed to establish a connection to one of the API's, please check your ethernet connection.")
