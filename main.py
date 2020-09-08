@@ -3,7 +3,6 @@ from sense_hat import SenseHat
 from time import sleep
 import json, urllib3
 
-
 # Setting up variables -------------------
 sh = SenseHat()
 http = urllib3.PoolManager()
@@ -16,7 +15,6 @@ Green, Red, Blue, Yellow, Orange, Brown, Black = (0,255,0), (255,0,0), (0,0,255)
 # Defining functions -------------------
 def DrawWind(c, b, delay):
     #All frames of animation, c is chosen color b is background
-
     frames = ([
         b, b, b, b, b, b, b, b,
         b, b, b, b, b, b, b, b,
